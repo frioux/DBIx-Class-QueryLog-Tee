@@ -1,6 +1,8 @@
 package DBIx::Class::QueryLog::Tee;
 
 use Moo;
+use warnings NONFATAL => 'all';
+
 use Sub::Name 'subname';
 use namespace::clean;
 
