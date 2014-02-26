@@ -38,7 +38,9 @@ for my $method (@methods) {
    *{$method} = subname $method => sub {
       my $self = shift;
 
-      $_->$method(@_) for values %{$self->_loggers};
+      $_->$method(@_) for
+         map $self->_loggers->{$_},
+         sort keys %{$self->_loggers};
    };
 }
 
