@@ -35,9 +35,7 @@ my @methods = qw(
 );
 for my $method (@methods) {
    no strict 'refs';
-   my $p = __PACKAGE__;
-   my $outer = "${p}::$method";
-   *{$outer} = subname $outer => sub {
+   *{$method} = subname $method => sub {
       my $self = shift;
 
       $_->$method(@_) for values %{$self->_loggers};
