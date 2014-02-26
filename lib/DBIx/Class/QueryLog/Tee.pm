@@ -1,5 +1,7 @@
 package DBIx::Class::QueryLog::Tee;
 
+# ABSTRACT: Log to multiple QueryLogs at a time
+
 use Moo;
 use warnings NONFATAL => 'all';
 
