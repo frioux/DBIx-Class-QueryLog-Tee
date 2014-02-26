@@ -65,3 +65,63 @@ for my $method (@methods) {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 SYNOPSIS
+
+ my $ql = DBIx::Class:::QueryLog->new;
+ $schema->storage->debugobj(
+    DBIx::Class:::QueryLog::Tee->new(
+       loggers => {
+          '1-original' => $schema->storage->debugobj,
+          '2-current'  => $ql,
+       },
+    ),
+ );
+
+Now all queries should be logged to both loggers.
+
+=head1 DESCRIPTION
+
+Sometimes you want to see what queries you are running without having to
+look at database logs or the console that your app is running on (if it
+even is running on a console.)  But what if you want to add tooling to,
+eg, count queries per web request, and B<also> see the queries being
+run on the console?  This module solves that problem.
+
+Fundamentally it has a HashRef of logger objects, and passes all of the
+logging commands through, in the order of the keys.  So if you need a
+logger to be first, make sure it has the "earliest" key.
+
+=method C<new>
+
+Optionally takes a C<loggers> hashref.  The values must each be a
+L</LOGGER>.
+
+=method C<add_logger>
+
+Takes a name and a L</LOGGER>.  Throws an exception if there is already
+a logger with the passed name.
+
+=method C<remove_logger>
+
+Takes a name.  Throws an exception if there is no logger with the
+passed name.
+
+=method C<replace_logger>
+
+Takes a name and a L</LOGGER>.  Will replace a logger with the same name, or
+just add it if there wasn't already one there.
+
+=head1 LOGGER
+
+A logger is defined as an object that has the following methods:
+
+   txn_begin txn_commit txn_rollback
+   svp_begin svp_release svp_rollback
+   query_start query_end
+
+=cut
