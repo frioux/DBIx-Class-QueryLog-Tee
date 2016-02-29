@@ -72,9 +72,9 @@ __END__
 
 =head1 SYNOPSIS
 
- my $ql = DBIx::Class:::QueryLog->new;
+ my $ql = DBIx::Class::QueryLog->new;
  $schema->storage->debugobj(
-    DBIx::Class:::QueryLog::Tee->new(
+    DBIx::Class::QueryLog::Tee->new(
        loggers => {
           '1-original' => $schema->storage->debugobj,
           '2-current'  => $ql,
