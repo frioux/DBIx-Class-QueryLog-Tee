@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+ - Fix SYNOPSIS (Thanks Felix Ostmann!)
 
 0.001000  2014-02-26 13:37:38CST-0600 America/Chicago
  - Initial Release
